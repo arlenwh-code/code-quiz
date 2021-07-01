@@ -3,12 +3,17 @@ var newElement = document.createElement('div');
 var h1El_1 = document.createElement('h1');
 var h1El_2 = document.createElement('h1');
 var timer = document.createElement('h2');
+var score = document.createElement('h2');
 var newOl = document.createElement('ol');
 var Li_1 = document.createElement('li');
 var Li_2 = document.createElement('li');
 var Li_3 = document.createElement('li');
 var Li_4 = document.createElement('li');
 var hr = document.createElement('hr');
+var form = document.createElement('form');
+var label = document.createElement('label');
+var input = document.createElement('input');
+var input2 = document.createElement('input');
 
 
 
@@ -27,6 +32,8 @@ h1El_2_Class.value = 'validation';
 var timerClass = document.createAttribute('class');
 timerClass.value = 'countDown';
 
+var scoreClass = document.createAttribute('class');
+scoreClass.value = 'score-count';
 // ---------------classes for question 1--------------------
 var liClass1 = document.createAttribute('class');
 liClass1.value = 'a1';
@@ -68,6 +75,12 @@ liClass3_3.value = 'a3-3';
 var liClass3_4 = document.createAttribute('class');
 liClass3_4.value = 'a3-4';
 
+// -----------------attributes for end function--------------------
+var iTypeTXT = document.createAttribute('type');
+iTypeTXT.value = 'text';
+
+var iTypeSub = document.createAttribute('type');
+iTypeSub.value = 'submit';
 
 // appends 
 document.body.appendChild(newElement);
@@ -80,7 +93,8 @@ document.body.children[1].appendChild(newBtn).innerHTML = "Start";
 document.body.children[1].children[0].setAttributeNode(h1Class);
 document.body.children[1].children[2].setAttributeNode(btnClass);
 
-var count = 6;
+var count = 76;
+var scoreCount = 0;
 
 document.querySelector(".start-btn").addEventListener("click", function (){
     q1();
@@ -89,8 +103,8 @@ document.querySelector(".start-btn").addEventListener("click", function (){
         count -= 1;
         document.querySelector(".countDown").textContent = count;
 
-        if(count <= 0){
-            document.querySelector(".countDown").textContent = 0;
+        if(count <= 0 ){
+            document.querySelector(".countDown").textContent = " ";
             clearInterval(stop);
             end();
         }
@@ -107,8 +121,10 @@ function q1 (){
     document.body.children[1].children[1].appendChild(Li_3).setAttributeNode(liClass3);
     document.body.children[1].children[1].appendChild(Li_4).setAttributeNode(liClass4);
     document.body.children[1].appendChild(timer).setAttributeNode(timerClass);
+    document.body.children[1].appendChild(form);
     document.body.children[1].appendChild(hr);
     document.body.children[1].appendChild(h1El_2).setAttributeNode(h1El_2_Class);
+    document.body.children[1].appendChild(score).setAttributeNode(scoreClass);
 
     document.querySelector(".a1").innerHTML = "Answer 1";
     document.querySelector(".a2").innerHTML = "Answer 2";
@@ -125,12 +141,12 @@ function q1 (){
     function validate (event){
         if(event.target.className === "a1"){
             document.querySelector('.validation').innerHTML = "Correct";
-            alert("Game Over");
+            scoreCount += 33;
             q2();
         }else if(event.target.className === "a2" || event.target.className === "a3" || event.target.className === "a4"){
             document.querySelector('.validation').innerHTML = "Wrong";
+            scoreCount -= 33;
             count -= 10;
-            alert("hello");
             q2();
         };
     }
@@ -158,12 +174,12 @@ function q2 (){
     function validate2 (event){
         if(event.target.className === "a2-1"){
             document.querySelector('.validation').innerHTML = "Correct";
-            alert("Game Over");
+            scoreCount += 33;
             q3();
         }else if(event.target.className === "a2-2" || event.target.className === "a2-3" || event.target.className === "a2-4"){
             document.querySelector('.validation').innerHTML = "Wrong";
+            scoreCount -= 33;
             count -= 10;
-            alert("hello");
             q3();
         };
     }
@@ -190,10 +206,12 @@ function q3 (){
     function validate3 (event){
         if(event.target.className === "a3-1"){
             document.querySelector('.validation').innerHTML = "Correct";
+            scoreCount += 33;
             end();
             
         }else if(event.target.className === "a3-2" || event.target.className === "a3-3" || event.target.className === "a3-4"){
             document.querySelector('.validation').innerHTML = "Wrong";
+            scoreCount -= 33;
             count -= 10;
             end();
             
@@ -203,15 +221,37 @@ function q3 (){
 };
 
 function end(){
+    count = 0;
     document.querySelector(".question").innerHTML = "All Done";
+    document.querySelector('.validation').innerHTML = "Score";
+    
 
     document.body.children[1].children[1].appendChild(Li_1).setAttributeNode(liClass3_1);
     document.body.children[1].children[1].appendChild(Li_2).setAttributeNode(liClass3_2);
     document.body.children[1].children[1].appendChild(Li_3).setAttributeNode(liClass3_3);
     document.body.children[1].children[1].appendChild(Li_4).setAttributeNode(liClass3_4); 
+    document.body.children[1].children[2].appendChild(input).setAttributeNode(iTypeTXT);
+    document.body.children[1].children[2].appendChild(input2).setAttributeNode(iTypeSub);
 
     document.querySelector(".a3-1").remove();
     document.querySelector(".a3-2").remove();
     document.querySelector(".a3-3").remove();
     document.querySelector(".a3-4").remove();
+    document.body.children[1].appendChild(newOl).remove();
+
+    if(scoreCount <= 0){
+        scoreCount = 0;
+    }
+
+    document.querySelector('.score-count').innerHTML = scoreCount;
+    document.body.children[1].children[2].appendChild(label).innerHTML = "Enter Initials:";
+    document.body.children[1].children[2].appendChild(input);
+    document.body.children[1].children[2].appendChild(input2).addEventListener("click", function(e){
+        e.preventDefault();
+
+        localStorage.setItem("initials", document.body.children[1].children[2].appendChild(input).value);
+        localStorage.setItem("score", scoreCount);
+    });
+    
+
 }
