@@ -6,6 +6,8 @@ User is presented with a welcome page that includes a start button that starts t
 <br>
 Once the user clicks the start button they are presented with the first question and the timer starts.
 <br>
+If a question is answered incorrectly 10 seconds are subtracted from the time.
+<br>
 If the user doesn't answer all of the questions before the time runs out the test automatically ends and the All Done page is presesnted allowing the user to submit his initials.
 <br>
 ![image](https://user-images.githubusercontent.com/82676357/124528868-43322900-ddd7-11eb-973e-15ef574d33d5.png)
