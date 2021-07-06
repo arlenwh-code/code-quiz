@@ -34,6 +34,7 @@ timerClass.value = 'countDown';
 
 var scoreClass = document.createAttribute('class');
 scoreClass.value = 'score-count';
+
 // ---------------classes for question 1--------------------
 var liClass1 = document.createAttribute('class');
 liClass1.value = 'a1';
@@ -82,10 +83,15 @@ iTypeTXT.value = 'text';
 var iTypeSub = document.createAttribute('type');
 iTypeSub.value = 'submit';
 
+var iTXT  = document.createAttribute('class');
+iTXT.value = 'initials';
+
+var iLabel  = document.createAttribute('class');
+iLabel.value = 'label';
 // appends 
 document.body.appendChild(newElement);
 
-document.body.children[1].appendChild(h1El_1).innerHTML = "Hello";
+document.body.children[1].appendChild(h1El_1).innerHTML = "Coding Quiz";
 document.body.children[1].appendChild(newOl);
 document.body.children[1].appendChild(newBtn).innerHTML = "Start";
 
@@ -113,7 +119,7 @@ document.querySelector(".start-btn").addEventListener("click", function (){
 
 function q1 (){
     document.body.children[1].appendChild(newBtn).remove();
-    document.querySelector(".question").innerHTML = "Question 1";
+    document.querySelector(".question").innerHTML = "What are data- attributes good for?";
 
     
     document.body.children[1].children[1].appendChild(Li_1).setAttributeNode(liClass1);
@@ -126,10 +132,10 @@ function q1 (){
     document.body.children[1].appendChild(h1El_2).setAttributeNode(h1El_2_Class);
     document.body.children[1].appendChild(score).setAttributeNode(scoreClass);
 
-    document.querySelector(".a1").innerHTML = "Answer 1";
-    document.querySelector(".a2").innerHTML = "Answer 2";
-    document.querySelector(".a3").innerHTML = "Answer 3";
-    document.querySelector(".a4").innerHTML = "Answer 4";
+    document.querySelector(".a1").innerHTML = "They allow you to store extra information on a html element that can be accessed by javascript or css.";
+    document.querySelector(".a2").innerHTML = "They allow you to store information on a html element.";
+    document.querySelector(".a3").innerHTML = "They allow you to store information on a html element that can be accessed by javascript.";
+    document.querySelector(".a4").innerHTML = "They allow you to store extra information on a html element that can be accessed by css.";
     
 
 
@@ -145,7 +151,6 @@ function q1 (){
             q2();
         }else if(event.target.className === "a2" || event.target.className === "a3" || event.target.className === "a4"){
             document.querySelector('.validation').innerHTML = "Wrong";
-            scoreCount -= 33;
             count -= 10;
             q2();
         };
@@ -172,13 +177,12 @@ function q2 (){
     
 
     function validate2 (event){
-        if(event.target.className === "a2-1"){
+        if(event.target.className === "a2-3"){
             document.querySelector('.validation').innerHTML = "Correct";
             scoreCount += 33;
             q3();
-        }else if(event.target.className === "a2-2" || event.target.className === "a2-3" || event.target.className === "a2-4"){
+        }else if(event.target.className === "a2-1" || event.target.className === "a2-2" || event.target.className === "a2-4"){
             document.querySelector('.validation').innerHTML = "Wrong";
-            scoreCount -= 33;
             count -= 10;
             q3();
         };
@@ -204,14 +208,13 @@ function q3 (){
     document.querySelector(".a3-4").addEventListener("click", validate3);
 
     function validate3 (event){
-        if(event.target.className === "a3-1"){
+        if(event.target.className === "a3-4"){
             document.querySelector('.validation').innerHTML = "Correct";
             scoreCount += 33;
             end();
             
-        }else if(event.target.className === "a3-2" || event.target.className === "a3-3" || event.target.className === "a3-4"){
+        }else if(event.target.className === "a3-1" || event.target.className === "a3-2" || event.target.className === "a3-3"){
             document.querySelector('.validation').innerHTML = "Wrong";
-            scoreCount -= 33;
             count -= 10;
             end();
             
@@ -238,20 +241,26 @@ function end(){
     document.querySelector(".a3-3").remove();
     document.querySelector(".a3-4").remove();
     document.body.children[1].appendChild(newOl).remove();
-
+//----------Sets Score to 0------------
     if(scoreCount <= 0){
         scoreCount = 0;
     }
 
     document.querySelector('.score-count').innerHTML = scoreCount;
-    document.body.children[1].children[2].appendChild(label).innerHTML = "Enter Initials:";
+    document.body.children[1].children[2].appendChild(label).setAttributeNode(iLabel);
+    document.querySelector('.label').innerHTML = "Enter Initials";
     document.body.children[1].children[2].appendChild(input);
+    //------Store Results and run results function----------- 
     document.body.children[1].children[2].appendChild(input2).addEventListener("click", function(e){
         e.preventDefault();
 
         localStorage.setItem("initials", document.body.children[1].children[2].appendChild(input).value);
         localStorage.setItem("score", scoreCount);
+        document.querySelector(".label").remove();
+        window.location.replace("results.html");
     });
     
-
+    
 }
+
+
