@@ -1,6 +1,7 @@
 # code-quiz
 Timed quiz asking basic coding questions.
 User is presented with a welcome page that includes a start button that starts the quiz.
+<br>
 ![image](https://user-images.githubusercontent.com/82676357/124527122-c1d89780-ddd2-11eb-8da0-a8f9cac5f79a.png)
 <br>
 Once the user clicks the start button they are presented with the first question and the timer starts.
