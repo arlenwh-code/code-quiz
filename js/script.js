@@ -219,6 +219,8 @@ function q3 (){
             end();
             
         };
+        document.querySelector('.validation').remove();
+        document.querySelector('.score-count').remove();
     }
 
 };
@@ -226,7 +228,7 @@ function q3 (){
 function end(){
     count = 0;
     document.querySelector(".question").innerHTML = "All Done";
-    document.querySelector('.validation').innerHTML = "Score";
+    
     
 
     document.body.children[1].children[1].appendChild(Li_1).setAttributeNode(liClass3_1);
@@ -246,9 +248,9 @@ function end(){
         scoreCount = 0;
     }
 
-    document.querySelector('.score-count').innerHTML = scoreCount;
+    
     document.body.children[1].children[2].appendChild(label).setAttributeNode(iLabel);
-    document.querySelector('.label').innerHTML = "Enter Initials";
+    document.querySelector('.label').innerHTML = "Enter Initials: ";
     document.body.children[1].children[2].appendChild(input);
     //------Store Results and run results function----------- 
     document.body.children[1].children[2].appendChild(input2).addEventListener("click", function(e){
